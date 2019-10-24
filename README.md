@@ -15,4 +15,4 @@ Integrantes:
 Thais Gennari Felipe RM83803
 Gabriel Biasoli RM81371
 Bruno Sequeira RM83748 
-Vitor Lourenzzetti RM 
+Vitor Lourenzzetti RM78197
