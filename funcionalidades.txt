@@ -1,0 +1,2 @@
+Funcionalidade Input : Cadastro - AvaliacaoBO
+Funcionalidade Output: PesquisarAvaliacao - AvaliacaoBO

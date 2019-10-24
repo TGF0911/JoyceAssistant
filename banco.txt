@@ -1,0 +1,495 @@
+DDL
+
+/*DROP TABLE t_jteam_adm CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_aluno CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_avaliacao CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_conteudo CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_disciplina CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_montar_teste CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_progressao CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_questao CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_teste_executado CASCADE CONSTRAINTS;
+
+DROP TABLE t_jteam_usuario CASCADE CONSTRAINTS;
+*/
+CREATE TABLE t_jteam_adm (
+cd_usuario NUMBER(5) NOT NULL,
+ds_certificado VARCHAR2(30) NOT NULL
+
+);
+
+CREATE TABLE t_jteam_aluno (
+cd_usuario NUMBER(5) NOT NULL,
+ds_escolaridade VARCHAR2(20) NOT NULL,
+ds_curso VARCHAR2(30) NOT NULL,
+
+dt_nascimento DATE NOT NULL,
+st_aluno VARCHAR2(15) NOT NULL,
+ds_telefone VARCHAR2(11) NOT NULL,
+st_notificacao VARCHAR2(10) NOT NULL,
+ds_endereco VARCHAR2(60) NOT NULL,
+dt_matricula DATE NOT NULL
+);
+
+ALTER TABLE t_jteam_aluno ADD CONSTRAINT t_jteam_aluno_pk PRIMARY KEY ( cd_usuario );
+
+CREATE TABLE t_jteam_avaliacao (
+cd_avaliacao NUMBER(5) NOT NULL,
+cd_conteudo NUMBER(5) NOT NULL,
+nm_titulo VARCHAR2(60) NOT NULL
+);
+
+ALTER TABLE t_jteam_avaliacao ADD CONSTRAINT t_jteam_avaliacao_pk PRIMARY KEY (
+cd_avaliacao );
+
+CREATE TABLE t_jteam_conteudo (
+cd_conteudo NUMBER(5) NOT NULL,
+nm_conteudo VARCHAR2(20) NOT NULL,
+cd_disciplina NUMBER(5) NOT NULL,
+ds_documento VARCHAR2(100) NOT NULL
+);
+
+ALTER TABLE t_jteam_conteudo ADD CONSTRAINT pk_jteam_conteudo PRIMARY KEY (
+cd_conteudo );
+
+CREATE TABLE t_jteam_disciplina (
+cd_conteudo NUMBER(5) NOT NULL,
+
+nm_disciplina VARCHAR2(60) NOT NULL,
+dt_inicio DATE NOT NULL,
+dt_termino DATE NOT NULL,
+st_disciplina VARCHAR2(10) NOT NULL
+);
+
+ALTER TABLE t_jteam_disciplina ADD CONSTRAINT pk_jteam_disciplina PRIMARY KEY (
+cd_conteudo );
+
+CREATE TABLE t_jteam_montar_teste (
+cd_montar_teste NUMBER(5) NOT NULL,
+cd_questao NUMBER(5) NOT NULL,
+cd_conteudo NUMBER NOT NULL,
+cd_avaliacao NUMBER NOT NULL
+
+);
+
+ALTER TABLE t_jteam_montar_teste ADD CONSTRAINT t_jteam_montar_teste_pk PRIMARY
+KEY ( cd_montar_teste );
+
+CREATE TABLE t_jteam_progressao (
+cd_progressao NUMBER(5) NOT NULL,
+cd_usuario NUMBER(5) NOT NULL,
+cd_conteudo NUMBER(5) NOT NULL,
+st_progressao VARCHAR2(10) NOT NULL,
+nr_avalicao NUMBER(2, 3) NOT NULL,
+nr_questao NUMBER(2) NOT NULL
+);
+
+ALTER TABLE t_jteam_progressao ADD CONSTRAINT t_jteam_progressao_pk PRIMARY KEY (
+cd_progressao );
+
+CREATE TABLE t_jteam_questao (
+cd_questao NUMBER(5) NOT NULL,
+ds_questao VARCHAR2(60) NOT NULL,
+ds_alternativa_a VARCHAR2(100) NOT NULL,
+ds_alternativa_b VARCHAR2(100) NOT NULL,
+ds_alternativa_c VARCHAR2(100) NOT NULL,
+ds_alternativa_d VARCHAR2(100) NOT NULL,
+ds_alternativa_correta VARCHAR2(100) NOT NULL,
+nr_peso NUMBER(2) NOT NULL
+);
+
+ALTER TABLE t_jteam_questao ADD CONSTRAINT pk_jteam_questao PRIMARY KEY (
+cd_questao );
+
+CREATE TABLE t_jteam_teste_executado (
+cd_montar_teste NUMBER(5) NOT NULL,
+st_resposta VARCHAR2(10) NOT NULL,
+ds_resposta VARCHAR2(60) NOT NULL,
+nr_nota NUMBER(2, 3)
+);
+
+CREATE TABLE t_jteam_usuario (
+cd_usuario NUMBER(5) NOT NULL,
+nm_nome VARCHAR2(30) NOT NULL,
+sn_senha VARCHAR2(10) NOT NULL,
+dt_nascimento DATE NOT NULL,
+ds_email VARCHAR2(60) NOT NULL,
+
+dt_inativacao DATE NULL
+);
+
+ALTER TABLE t_jteam_usuario ADD CONSTRAINT pk_jteam_usuario PRIMARY KEY ( cd_usuario
+);
+
+
+
+
+
+DML
+
+
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (4,5,5);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (1,4,4);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (4,2,5);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (5,1,3);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (5,5,3);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (4,1,5);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (3,3,2);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (2,3,4);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (3,5,4);
+INSERT INTO T_JTEAM_MATRICULA (cd_usuario,cd_disciplina,cd_conteudo) VALUES (3,2,2);
+
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (1,'Kellie');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (2,'Rosalyn');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (3,'Donna');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (4,'Brian');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (5,'Sloane');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (6,'Gabriel');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (7,'Hyatt');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (8,'Abel');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (9,'Aurelia');
+INSERT INTO T_JTEAM_ADM (cd_usuario,ds_certificado) VALUES (10,'Beck');
+
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (1,'auctor. Mauris','nunc est, mol','1111/1010/2119','pretium
+aliquet, ','1-668-395-8739','ps parturient','972-9785 Vitae, Street','0606/0909/20192');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (2,'nec orci. Donec','dictum
+eu,','2525/0808/2019201920192019','Sed molestie. Sed id risus quis diam luctus lobortis.
+Class','591-7713','nec, malesuada ut, sem. Nulla interdum.','Ap #592-2024 Lorem,
+Street','1212/0202/2020202020202020');
+
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (3,'risus. Nunc','amet
+diam','1111/0606/2020202020202020','amet ultricies sem magna nec quam. Curabitur vel
+lectus. Cum','272-0394','pellentesque massa lobortis ultrices.','4625 Vitae
+St.','2323/0808/2019201920192019');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (4,'mauris. Suspendisse aliquet molestie tellus. Aenean
+egestas hendrerit','consequat dolor vitae','0202/0202/2019201920192019','imperdiet
+ullamcorper. Duis at lacus. Quisque purus sapien, gravida non,','1-888-498-4738','Sed eu
+nibh','2641 Mollis. Ave','0404/0404/2020202020202020');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (5,'dolor egestas rhoncus. Proin nisl sem, consequat nec,
+mollis vitae','tempor augue ac','0404/0909/2020202020202020','faucibus leo, in lobortis tellus
+justo sit amet nulla. Donec','1-577-652-4569','Sed id','Ap #491-4267 Egestas
+St.','0707/1010/2019201920192019');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (6,'sed libero. Proin sed turpis nec mauris','Etiam imperdiet
+dictum magna. Ut tincidunt orci quis lectus.','3030/0505/2019201920192019','libero. Donec
+consectetuer mauris id sapien. Cras dolor dolor, tempus','1-689-477-2405','fermentum risus, at
+fringilla purus mauris a nunc.','P.O. Box 771, 7551 Risus. Rd.','0707/0909/2019201920192019');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (7,'imperdiet, erat nonummy ultricies','diam.
+Duis','1717/0303/2020202020202020','amet, consectetuer adipiscing elit. Etiam laoreet, libero
+et tristique pellentesque,','1-384-102-9922','per conubia nostra, per inceptos hymenaeos.
+Mauris','Ap #512-9783 Donec Street','0101/1010/2020202020202020');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (8,'tincidunt, nunc ac mattis ornare, lectus','Donec porttitor
+tellus non magna. Nam ligula elit,','0707/0707/2019201920192019','vel sapien imperdiet
+ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt','423-6834','sit amet, faucibus ut,
+nulla. Cras eu tellus eu','P.O. Box 752, 7998 Placerat. Rd.','1414/0606/2019201920192019');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+endereco,dt_matricula) VALUES (9,'inceptos hymenaeos. Mauris ut quam vel','Duis at
+lacus.','0404/1010/2019201920192019','varius et, euismod et, commodo at, libero. Morbi
+accumsan laoreet','1-862-114-9323','malesuada.','718-3401 Lectus
+Street','1616/0606/2020202020202020');
+INSERT INTO T_JTEAM_ALUNO
+(cd_usuario,ds_escolaridade,ds_curso,dt_nascimento,st_aluno,ds_telefone,st_notificacao,ds_
+
+endereco,dt_matricula) VALUES (10,'ullamcorper. Duis at lacus.','at
+lacus.','2222/0909/2020202020202020','mi, ac mattis velit justo nec ante. Maecenas mi
+felis,','794-8174','volutpat','614-7574 Fringilla St.','0505/1212/2019201920192019');
+
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (1,'imperdiet, erat nonummy ultricies ornare, elit elit',1,'Proin mi. Aliquam gravida');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (2,'dapibus quam quis diam. Pellentesque habitant morbi',4,'malesuada fringilla est.
+Mauris eu');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (3,'at augue id ante dictum cursus. Nunc mauris',2,'Integer vulputate, risus a');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (4,'Nunc quis arcu vel quam dignissim',2,'a, enim. Suspendisse aliquet, sem ut cursus
+luctus, ipsum leo');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (5,'mollis. Integer tincidunt aliquam arcu. Aliquam ultrices',5,'eu erat');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (6,'urna convallis erat, eget',5,'sapien. Cras dolor dolor, tempus');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (7,'aliquet, sem ut cursus luctus, ipsum',3,'quam,');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (8,'Morbi neque tellus, imperdiet non, vestibulum nec, euismod in,',1,'lacinia vitae');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (9,'quis lectus. Nullam suscipit, est ac',4,'eu arcu. Morbi sit amet');
+INSERT INTO T_JTEAM_CONTEUDO (cd_conteudo,nm_conteudo,cd_disciplina,ds_documento)
+VALUES (10,'nulla at sem molestie sodales. Mauris blandit enim',1,'ipsum sodales purus, in
+molestie');
+
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(1,'Portia',8831,TO_DATE('25/12/1999','DD/MM/YYYY'),'et.netus@nonummy.edu',TO_DATE('3
+0/12/2018','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(2,'Griffith',9595,TO_DATE('01/10/2020','DD/MM/YYYY'),'arcu.Sed@orciluctus.org',TO_DATE('
+18/08/2019','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(3,'Imani',8045,TO_DATE('30/01/2019','DD/MM/YYYY'),'eu@Phasellusornare.com',TO_DATE('1
+2/06/2020','DD/MM/YYYY'));
+
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(4,'Tara',2005,TO_DATE('25/04/2019','DD/MM/YYYY'),'Mauris@condimentumDonec.edu',TO_
+DATE('15/01/2020','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(5,'Adrian',1414,TO_DATE('20/08/2020','DD/MM/YYYY'),'ullamcorper.Duis@nisl.co.uk',TO_DA
+TE('24/03/2019','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(6,'Lael',4386,TO_DATE('08/06/2019','DD/MM/YYYY'),'nulla.vulputate.dui@Proinvelarcu.org',T
+O_DATE('29/09/2019','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(7,'Naomi',3735,TO_DATE('21/04/2020','DD/MM/YYYY'),'euismod.in@etmalesuadafames.ca',T
+O_DATE('20/09/2020','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(8,'Linus',9552,TO_DATE('24/03/2019','DD/MM/YYYY'),'pede@commodo.ca',TO_DATE('12/02/
+2020','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(9,'Zoe',1485,TO_DATE('02/03/2020','DD/MM/YYYY'),'In.condimentum@amagna.co.uk',TO_DA
+TE('21/06/2019','DD/MM/YYYY'));
+INSERT INTO T_JTEAM_USUARIO
+(cd_usuario,nm_nome,sn_senha,dt_nascimento,ds_email,dt_inativacao) VALUES
+(10,'Ayanna',4509,TO_DATE('09/08/2020','DD/MM/YYYY'),'et.pede@lobortistellus.org',TO_DA
+TE('13/12/1018','DD/MM/YYYY'));
+
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (1,'tellus faucibus leo, in lobortis tellus justo','lectus
+ante','egestas. Aliquam nec enim. Nunc ut erat. Sed nunc','id risus quis','sollicitudin orci sem
+eget massa. Suspendisse eleifend. Cras','egestas blandit. Nam nulla magna, malesuada vel,',2);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (2,'Praesent interdum ligula eu enim. Etiam imperdiet
+dictum magna. Ut','enim. Etiam imperdiet dictum magna.","sodales. Mauris blandit enim","eu
+odio tristique pharetra. Quisque ac libero','lacus pede sagittis augue, eu tempor erat neque
+non quam.','erat semper rutrum. Fusce dolor',2);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+
+ds_alternativa_correta,nr_peso) VALUES (3,'Cras dolor dolor, tempus non,','id, blandit at, nisi.
+Cum','nisi nibh lacinia","Proin mi. Aliquam gravida mauris ut mi.","Morbi neque tellus,
+imperdiet non,","a, magna. Lorem ipsum dolor sit",5),(2,"id, erat. Etiam vestibulum
+massa","consectetuer adipiscing elit. Aliquam auctor, velit eget laoreet','erat. Sed nunc est,
+mollis non,','Suspendisse sed dolor. Fusce','ullamcorper, nisl','molestie in, tempus eu, ligula.
+Aenean',5);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (4,'lectus convallis est, vitae sodales nisi magna
+sed','in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus','lectus, a sollicitudin
+orci sem eget massa. Suspendisse eleifend.','Phasellus','volutpat nunc sit amet metus.','cursus
+et, eros. Proin ultrices.',3);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (5,'et magnis dis parturient montes, nascetur
+ridiculus mus.','fringilla cursus purus. Nullam scelerisque neque sed','sit amet, consectetuer
+adipiscing elit.','ut','justo','faucibus leo, in lobortis tellus justo sit amet',5);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (6,'eget mollis lectus pede et risus. Quisque libero
+lacus,','porttitor scelerisque neque. Nullam nisl. Maecenas malesuada fringilla est.','magna.
+Duis dignissim tempor arcu. Vestibulum ut','sed, facilisis vitae, orci. Phasellus dapibus quam
+quis','feugiat metus sit amet ante. Vivamus non lorem','ut aliquam',2);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (7,'eget massa. Suspendisse eleifend. Cras sed leo.
+Cras vehicula aliquet','ornare, elit elit fermentum risus, at fringilla purus','non leo.
+Vivamus','velit eu sem. Pellentesque ut ipsum ac mi eleifend','orci lobortis','Duis volutpat',4);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (8,'in faucibus orci luctus et ultrices posuere
+cubilia','dictum. Phasellus in felis. Nulla tempor augue','ullamcorper eu, euismod ac,
+fermentum vel, mauris. Integer sem elit,','felis purus ac tellus. Suspendisse sed dolor. Fusce
+mi','sagittis. Duis gravida. Praesent eu","Proin vel',2);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (9,'sagittis felis. Donec tempor, est ac mattis semper,
+dui','vel arcu. Curabitur ut odio vel est tempor','ligula consectetuer rhoncus. Nullam velit
+dui,','In faucibus. Morbi','pede nec ante blandit viverra. Donec tempus,','Donec sollicitudin
+adipiscing',1);
+INSERT INTO T_JTEAM_QUESTAO
+(cd_questao,ds_questao,ds_alternativa_a,ds_alternativa_b,ds_alternativa_c,ds_alternativa_d,
+ds_alternativa_correta,nr_peso) VALUES (10,'sit','est. Nunc ullamcorper, velit in aliquet
+lobortis, nisi','amet massa. Quisque porttitor eros nec tellus. Nunc lectus pede,','eget ipsum.
+
+Suspendisse sagittis. Nullam vitae diam. Proin','ut, molestie in, tempus eu, ligula.
+Aenean','Donec est.',2);
+
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(4,4,3,'sit amet risus. Donec egestas.',3,5);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(5,1,5,'commodo auctor velit. Aliquam nisl. Nulla eu neque pellentesque',1,1);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(1,1,3,'Morbi accumsan laoreet ipsum. Curabitur',4,8);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(2,1,5,'nibh. Phasellus',2,1);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(1,2,2,'eu elit. Nulla facilisi. Sed',4,19);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(3,4,4,'orci quis lectus. Nullam suscipit, est ac facilisis facilisis',2,13);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(5,4,1,'Etiam gravida molestie arcu. Sed eu nibh',5,8);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(2,4,1,'sapien.',2,16);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(2,5,1,'at pretium',4,12);
+INSERT INTO T_JTEAM_PROGRESSAO
+(cd_progressao,cd_usuario,cd_conteudo,st_progressao,nr_avaliacao,nr_questao) VALUES
+(5,5,2,'lectus pede et risus. Quisque libero lacus',4,20);
+
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (2,5,1,5);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (1,3,4,5);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (4,5,3,5);
+
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (2,2,3,1);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (1,3,2,3);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (4,4,1,3);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (3,1,3,2);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (3,1,2,2);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (2,4,1,3);
+INSERT INTO T_JTEAM_MONTAR_TESTE
+(cd_montar_teste,cd_questao,cd_conteudo,cd_avaliacao) VALUES (3,1,2,4);
+
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (3,2,'mus.
+Donec dignissim magna a tortor. Nunc commodo');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (1,2,'arcu.
+Morbi');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES
+(4,2,'venenatis a, magna. Lorem ipsum dolor');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES
+(2,2,'Proin');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES
+(5,2,'torquent per conubia nostra, per');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (4,5,'ipsum
+leo elementum sem, vitae aliquam eros turpis non');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (3,1,'Donec
+non justo. Proin');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (4,2,'eu
+enim. Etiam imperdiet dictum magna.');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (2,4,'at
+pede. Cras vulputate');
+INSERT INTO T_JTEAM_AVALIACAO (cd_avaliacao,cd_conteudo,nm_titulo) VALUES (2,4,'at
+pede. Cras vulputate');
+
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (1,'adipiscing elit.
+Aliquam auctor, velit
+eget','1919/0101/2020202020202020','0707/0707/2019201920192019','massa lobortis
+ultrices. Vivamus rhoncus. Donec est.');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (2,'adipiscing fringilla,
+porttitor','2424/0505/2020202020202020','0202/0606/2020202020202020','sagittis augue, eu
+tempor erat neque non quam.');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (3,'odio sagittis
+semper. Nam tempor diam dictum sapien. Aenean
+massa.','3131/0303/2020202020202020','3131/0505/2023202320232023','Sed');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (4,'ipsum dolor sit
+amet, consectetuer adipiscing
+elit.','0808/0606/2023202320232023','2020/1010/2023202320232023','sociosqu ad litora
+torquent per conubia');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (5,'Pellentesque
+habitant morbi','1414/0909/2020202020202020','1515/0808/2025202520252025','nec metus
+facilisis lorem tristique aliquet. Phasellus');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES
+(6,'sem','1717/0606/2024202420242024','2323/0303/2025202520252025','mi lacinia mattis
+eu');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (7,'eget nisi dictum
+augue','1818/0202/2020202020202020','0404/0505/2025202520252025','Donec elementum,
+lorem ut aliquam iaculis, lacus');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (8,'sed pede.
+Cum','2828/0909/2023202320232023','2222/0303/2022202220222022','vestibulum.');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (9,'Curabitur sed
+tortor. Integer','1010/0404/2021202120212021','2424/0202/2019201920192019','ut eros non
+enim');
+INSERT INTO T_JTEAM_DISCIPLINA
+(cd_conteudo,nm_disciplina,dt_inicio,dt_termino,st_disciplina) VALUES (10,'1interdum ligula
+eu enim. Etiam imperdiet
+dictum','0606/0303/2021202120212021','1515/1212/2024202420242024','at lacus. Quisque
+purus sapien, gravida non');
+
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(1,'velget','19/01/2020','12/777/777');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(2,'adipiscr','2424/0505/2020202020202020','0202/0606/2020202020202020');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(3,'odassa.','3131/0303/2020202020202020','3131/0505/2023202320232023');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES (4,'iuhfff
+uyuyu.','0808/0606/2023202320232023','2020/1010/2023202320232023');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(5,'Pebi','1414/0909/2020202020202020','1515/0808/2025202520252025');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(6,'sem','1717/0606/2024202420242024','2323/0303/2025202520252025');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(7,'eugue','1818/0202/2020202020202020','0404/0505/2025202520252025');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(8,'sem','2320233999','2222/0303/2022202220222022');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(9,'Curabi','1010/0404/2021202120212021','2424/0202/2019201920192019');
+INSERT INTO T_JTEAM_TESTE_EXECUTADO
+(cd_montar_teste,st_resposta,ds_resposta,nr_nota) VALUES
+(10,'1in','0606/0303/2021202120212021','1515/1212/2024202420242024');
